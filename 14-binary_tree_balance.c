@@ -8,13 +8,15 @@
  */
 size_t heightt(const binary_tree_t *tree)
 {
-	size_t i = 0,j = 0;
+	size_t i = 0, j = 0;
+
 	if (tree == NULL)
 		return (0);
-	if(tree->left != NULL)
-		i = heightt(tree->left) + 1;
-	if(tree->right != NULL)
-		j = heightt(tree->right) + 1;
+        
+	i = heightt(tree->left) + 1;
+        
+	j = heightt(tree->right) + 1;
+	printf(" n = %d\ti == %ld\t j== %ld\n",tree->n,i,j);
 	if (i < j)
 		return (j);
 	return (i);
@@ -29,12 +31,6 @@ int binary_tree_balance(const binary_tree_t *tree)
 {
 	if(tree == NULL)
 		return (0);
-	printf("sdfsdf");
-	if (tree->left != NULL && tree->right == NULL)
-		return (heightt(tree->left));
-	else if (tree->left == NULL && tree->right != NULL)
-		return ((heightt(tree->right)) * (-1));
-	else if (tree->left == NULL && tree->right == NULL)
-		return (0);
+	
 	return (heightt(tree->left) - heightt(tree->right));
 }
