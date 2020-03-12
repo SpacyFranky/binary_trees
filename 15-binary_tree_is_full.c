@@ -8,19 +8,18 @@
  */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	int x,i = 0;
+	int i = 0;
 	if (tree == NULL)
 		return (0);
-	x = tree->n;
-	printf("n == %d\n",x);
 
-	if (!tree)
+
+	if (tree == NULL)
 		return (0);
 	if ((tree->left == NULL && tree->right == NULL) || (tree->left != NULL && tree->right != NULL))
 		i = binary_tree_is_full(tree->left) + binary_tree_is_full(tree->right);
 	else
 		i = 1;
-	if (i == 1){
-		return (0);}
+	if (i == 1)
+		return (0);
 	return (1);
 }
