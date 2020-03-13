@@ -1,11 +1,16 @@
 #include "binary_trees.h"
 #include <stdlib.h>
 #include <stdio.h>
+
 /**
  * heightt - function that measures the height of a binary tree
+ *
  * @tree: a pointer to the parent node of the node.
+ *
  * Return: the height of the tree or 0.
- */
+*/
+
+
 size_t heightt(const binary_tree_t *tree)
 {
 	size_t i = 0, j = 0;
