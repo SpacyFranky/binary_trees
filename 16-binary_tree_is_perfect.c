@@ -1,57 +1,43 @@
 #include "binary_trees.h"
 #include <stdlib.h>
-
 /**
- * is_full - function that checks if a binary tree is full
+ * depth - function that measures the depth
+ * of a node in a binary tree
  * @tree: a pointer to the parent node of the node.
- * Return: the full of the tree 1 or 0.
+ * Return: the depth of the tree or 0.
  */
-int is_full(const binary_tree_t *tree)
+int depth(const binary_tree_t *tree)
 {
 	int i = 0;
 
-	if (tree == NULL)
-		return (0);
-	if ((tree->left == NULL && tree->right == NULL) ||
-	    (tree->left != NULL && tree->right != NULL))
-		i = is_full(tree->left) + is_full(tree->right);
-	else
-		i = 1;
-	if (i == 1)
-		return (0);
-	return (1);
-}
-
-/**
- * heightt - function that measures the height of a binary tree
- * @tree: a pointer to the parent node of the node.
- * Return: the height of the tree or 0.
- */
-size_t heightt(const binary_tree_t *tree)
-{
-	size_t i = 0, j = 0;
-
-	if (tree == NULL)
-		return (0);
-	i = heightt(tree->left) + 1;
-
-	j = heightt(tree->right) + 1;
-	if (i < j)
-		return (j);
+	while (tree)
+	{
+		i++;
+		tree = tree->parent;
+	}
 	return (i);
 }
 
 /**
- * binary_tree_balance - function that measures the balance factor
+ * perfect - checks if a binary tree is perfect
  * of a binary tree
  * @tree: a pointer to the parent node of the node.
- * Return: the count of the node or 0.
+ * @d:depth of tree.
+ * @level: level of the node.
+ * Return: 0 or 1.
  */
-int balance(const binary_tree_t *tree)
+int perfect(const binary_tree_t *tree, int d, int level)
 {
 	if (tree == NULL)
+		return (1);
+
+	if (tree->left == NULL && tree->right == NULL)
+		return(d == level+1);
+	if (tree->left == NULL || tree->right == NULL)
 		return (0);
-	return (heightt(tree->left) - heightt(tree->right));
+
+	return (perfect(tree->left, d, level+1) &&
+		perfect(tree->right, d, level+1));
 }
 
 /**
@@ -62,12 +48,8 @@ int balance(const binary_tree_t *tree)
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
+	int d;
 
-	if (tree == NULL)
-		return (0);
-
-	if (is_full(tree) == 1 && balance(tree) == 0)
-		return (1);
-	else
-		return (0);
+	d = depth(tree);
+	return (perfect(tree, d, 0));
 }
