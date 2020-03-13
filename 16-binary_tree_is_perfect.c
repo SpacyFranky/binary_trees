@@ -2,11 +2,11 @@
 #include <stdlib.h>
 
 /**
- * binary_tree_is_full - function that checks if a binary tree is full
+ * is_full - function that checks if a binary tree is full
  * @tree: a pointer to the parent node of the node.
  * Return: the full of the tree 1 or 0.
  */
-int binary_tree_is_full(const binary_tree_t *tree)
+int is_full(const binary_tree_t *tree)
 {
 	int i = 0;
 
@@ -14,7 +14,7 @@ int binary_tree_is_full(const binary_tree_t *tree)
 		return (0);
 	if ((tree->left == NULL && tree->right == NULL) ||
 	    (tree->left != NULL && tree->right != NULL))
-		i = binary_tree_is_full(tree->left) + binary_tree_is_full(tree->right);
+		i = is_full(tree->left) + is_full(tree->right);
 	else
 		i = 1;
 	if (i == 1)
@@ -47,7 +47,7 @@ size_t heightt(const binary_tree_t *tree)
  * @tree: a pointer to the parent node of the node.
  * Return: the count of the node or 0.
  */
-int binary_tree_balance(const binary_tree_t *tree)
+int balance(const binary_tree_t *tree)
 {
 	if (tree == NULL)
 		return (0);
@@ -66,7 +66,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (tree == NULL)
 		return (0);
 
-	if (binary_tree_is_full(tree) == 1 && binary_tree_balance(tree) == 0)
+	if (is_full(tree) == 1 && balance(tree) == 0)
 		return (1);
 	else
 		return (0);
