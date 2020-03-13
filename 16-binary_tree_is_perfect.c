@@ -32,12 +32,12 @@ int perfect(const binary_tree_t *tree, int d, int level)
 		return (1);
 
 	if (tree->left == NULL && tree->right == NULL)
-		return(d == level+1);
+		return (d == level + 1);
 	if (tree->left == NULL || tree->right == NULL)
 		return (0);
 
-	return (perfect(tree->left, d, level+1) &&
-		perfect(tree->right, d, level+1));
+	return (perfect(tree->left, d, level + 1) &&
+		perfect(tree->right, d, level + 1));
 }
 
 /**
